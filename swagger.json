@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Products API",
-    "description": "Products API",
+    "title": "T9 Store API",
+    "description": "T9 Store API",
     "version": "1.0.0"
   },
   "host": "localhost:3080",

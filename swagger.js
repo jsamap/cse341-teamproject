@@ -8,11 +8,11 @@ console.log("[#] isProduction: ", isProduction)
 
 const doc = {
   info: {
-    title: "Products API",
-    description: "Products API"
+    title: "T9 Store API",
+    description: "T9 Store API"
   },
   host: isProduction 
-    ? "js-cse341-project2.onrender.com"
+    ? "js-cse341-teamproject.onrender.com"
     : "localhost:3080",
   schemes: isProduction ? ["https"] : ["http"]
 };
