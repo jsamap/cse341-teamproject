@@ -2,14 +2,15 @@ const validator = require('../helpers/validate');
 
 const saveProduct = (req, res, next) => {
   const validationRule = {
-    name: 'required|string',
-    description: 'required|string',
-    category: 'required|string|size:24|regex:/^[0-9a-fA-F]{24}$/',
+    name: 'required|string|max:255',
+    description: 'required|string|max:1000',
     price: 'required|numeric|min:0',
-    currency: 'required|string',
-    stock: 'required|integer|min:0',
-    rating: 'numeric|min:0|max:5'
+    image: 'required|string|url',
+    rating: 'numeric|min:0|max:5',
+    reviews: 'required|numeric|min:0', 
+    created: 'required|date'
   };
+      
   validator(req.body, validationRule, {}, (err, status) => {
     if (!status) {
       res.status(400).send({
