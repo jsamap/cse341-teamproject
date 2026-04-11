@@ -43,16 +43,11 @@ const createRole = async (req, res) => {
   try {
     const role = {
       name: req.body.name,
-      description: req.body.description,
-      price: req.body.price,
-      image: req.body.image,
-      rating: req.body.rating,
-      reviews: req.body.reviews,
-      created: req.body.created,
+      permissions: req.body.permissions,
     };
     const response = await mongodb
       .getDatabase()
-      .db("project2")
+      .db("cse341-project")
       .collection("roles")
       .insertOne(role);
     if (response.acknowledged)
@@ -77,18 +72,13 @@ const updateRole = async (req, res) => {
     const roleId = new ObjectId(req.params.id);
     const role = {
       name: req.body.name,
-      description: req.body.description,
-      price: req.body.price,
-      image: req.body.image,
-      rating: req.body.rating,
-      reviews: req.body.reviews,
-      created: req.body.created,
+      permissions: req.body.permissions,
     };
     const response = await mongodb
       .getDatabase()
-      .db("project2")
+      .db("cse341-project")
       .collection("roles")
-      .replaceOne({ _id: productId }, product);
+      .replaceOne({ _id: roleId }, role);
     if (response.modifiedCount > 0) res.status(204).send();
     else
       res
@@ -110,7 +100,7 @@ const deleteRole = async (req, res) => {
     const roleId = new ObjectId(req.params.id);
     const response = await mongodb
       .getDatabase()
-      .db("project2")
+      .db("cse341-project")
       .collection("roles")
       .deleteOne({ _id: roleId });
     if (response.deletedCount > 0) {

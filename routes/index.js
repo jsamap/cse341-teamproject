@@ -6,6 +6,7 @@ router.use("/", require("./swagger"));
 
 
 router.use("/products", require("./products"));
+router.use("/roles", require("./roles"));
 
 router.get("/login", passport.authenticate("github"), (req, res) => {});
 

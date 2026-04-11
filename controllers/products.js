@@ -45,11 +45,11 @@ const createProduct = async (req, res) => {
     const product = {
       name: req.body.name,
       description: req.body.description,
-      price: req.body.price,
       image: req.body.image,
+      price: req.body.price,
+      stock: req.body.stock,
       rating: req.body.rating,
       reviews: req.body.reviews,
-      created: req.body.created,
     };
     const response = await mongodb
       .getDatabase()
@@ -79,11 +79,11 @@ const updateProduct = async (req, res) => {
     const product = {
       name: req.body.name,
       description: req.body.description,
-      price: req.body.price,
       image: req.body.image,
+      price: req.body.price,
+      stock: req.body.stock,
       rating: req.body.rating,
       reviews: req.body.reviews,
-      created: req.body.created,
     };
     const response = await mongodb
       .getDatabase()
