@@ -31,7 +31,6 @@ const getSingle = async (req, res) => {
     .collection("products")
     .find({ _id: productId })
     .toArray()
-    console.log("!!! ", products)
     res.setHeader("Content-Type", "application/json");
     res.status(200).json(products[0]);
   } catch (err) {
@@ -46,10 +45,10 @@ const createProduct = async (req, res) => {
       name: req.body.name,
       description: req.body.description,
       image: req.body.image,
-      price: req.body.price,
-      stock: req.body.stock,
-      rating: req.body.rating,
-      reviews: req.body.reviews,
+      price: Number(req.body.price),
+      stock: Number(req.body.stock),
+      rating: Number(req.body.rating),
+      reviews: Number(req.body.reviews),
     };
     const response = await mongodb
       .getDatabase()
@@ -80,10 +79,10 @@ const updateProduct = async (req, res) => {
       name: req.body.name,
       description: req.body.description,
       image: req.body.image,
-      price: req.body.price,
-      stock: req.body.stock,
-      rating: req.body.rating,
-      reviews: req.body.reviews,
+      price: Number(req.body.price),
+      stock: Number(req.body.stock),
+      rating: Number(req.body.rating),
+      reviews: Number(req.body.reviews),
     };
     const response = await mongodb
       .getDatabase()
