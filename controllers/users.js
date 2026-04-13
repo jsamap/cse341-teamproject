@@ -1,6 +1,6 @@
 const mongodb = require("../data/database");
 const ObjectId = require("mongodb").ObjectId;
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
 const getAll = async (req, res) => {
     //#swagger.tags=["Users"]
@@ -33,6 +33,9 @@ const getSingle = async (req, res) => {
             .find({ _id: userId })
             .toArray();
         res.setHeader("Content-Type", "application/json");
+        if (users.length === 0) {
+            return res.status(404).json("No user found with the provided id.");
+        }
         res.status(200).json(users[0]);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -40,7 +43,7 @@ const getSingle = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-    //#swagger.tags=["Users"]    
+    //#swagger.tags=["Users"]
     try {
         const user = {
             fname: req.body.fname,
