@@ -16,7 +16,7 @@
   "main": "server.js",
   "scripts": {
     "swagger": "node swagger.js",
-    "test": "jest --watch --coverage",
+    "test": "jest --watch --coverage --detectOpenHandles",
     "dev": "npm run swagger && nodemon server.js",
     "start": "npm run swagger && node server.js"
   },

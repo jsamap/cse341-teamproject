@@ -13,7 +13,6 @@ beforeAll(() => {
     });
 });
 
-
 describe("GET PRODUCTS", () => {
     test("/products should return all the products", async () => {
         const res = await request.get("/products");
@@ -27,14 +26,13 @@ describe("GET PRODUCTS", () => {
         expect(res.statusCode).toBe(200);
         expect(res.header["content-type"]).toMatch(/json/);
     });
-    
+
     // test("/products/:id should return a 404 status code when the id is not found", async () => {
     //     const res = await request.get("/products/123456789012345678901234");
     //     expect(res.statusCode).toBe(404);
     //     expect(res.header["content-type"]).toMatch(/json/);
     // });
 });
-
 
 describe("GET REVIEWS", () => {
     test("/reviews should return all the reviews", async () => {
@@ -48,7 +46,7 @@ describe("GET REVIEWS", () => {
         const res = await request.get("/reviews/6621a1f29f1b8c0012345681");
         expect(res.statusCode).toBe(200);
         expect(res.header["content-type"]).toMatch(/json/);
-    });  
+    });
 });
 
 describe("GET USERS", () => {
@@ -58,12 +56,12 @@ describe("GET USERS", () => {
         expect(res.header["content-type"]).toMatch(/json/);
         expect(Array.isArray(res.body)).toBe(true);
     });
-    
+
     test("/users/:id should return the user related to the id provided", async () => {
         const res = await request.get("/users/6621a1f29f1b8c0012345691");
         expect(res.statusCode).toBe(200);
         expect(res.header["content-type"]).toMatch(/json/);
-    });   
+    });
 });
 
 describe("GET ROLES", () => {
@@ -82,5 +80,5 @@ describe("GET ROLES", () => {
 });
 
 afterAll(async () => {
-    await mongodb.getDatabase().close();
+    await mongodb.closeDb();
 });

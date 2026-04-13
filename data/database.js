@@ -9,19 +9,18 @@ dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
 let database
 
-const initDb = (callback) => {
-    if(database){
+const initDb = async (callback) => {
+    if (database) {
         console.log("DB is already initialized.")
         return callback(null, database)
     }
-    MongoClient.connect(process.env.MONGODB_URL)
-        .then((client) => {
-            database = client
-            callback(null, database)
-        })
-        .catch((err) => {
-            callback(err)
-        })
+    try {
+        const client = await MongoClient.connect(process.env.MONGODB_URL)
+        database = client
+        callback(null, database)
+    } catch (err) {
+        callback(err)
+    }
 }
 
 const getDatabase = () => {
@@ -31,9 +30,18 @@ const getDatabase = () => {
     return database
 }
 
+const closeDb = async () => {
+    if (!database) {
+        console.log("No database connection to close.")
+        return
+    }
+    await database.close()   // <-- closes the MongoClient
+    console.log("Database connection closed.")
+    database = null
+}
+
 module.exports = {
     initDb,
     getDatabase,
+    closeDb,
 }
-
-
